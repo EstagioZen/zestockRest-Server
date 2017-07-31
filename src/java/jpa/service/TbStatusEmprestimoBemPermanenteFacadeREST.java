@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbStatusEmprestimoBemPermanente;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Stateless
 @Path("jpa.tbstatusemprestimobempermanente")
 public class TbStatusEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbStatusEmprestimoBemPermanente> {

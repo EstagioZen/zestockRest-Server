@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbLocaisLotacaoBemPermanente;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Stateless
 @Path("jpa.tblocaislotacaobempermanente")
 public class TbLocaisLotacaoBemPermanenteFacadeREST extends AbstractFacade<TbLocaisLotacaoBemPermanente> {

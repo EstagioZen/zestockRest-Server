@@ -21,10 +21,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Entity
 @Table(name = "tb_status_emprestimo_bem_permanente")
 @XmlRootElement

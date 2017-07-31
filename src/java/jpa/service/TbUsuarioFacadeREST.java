@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbUsuario;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Stateless
 @Path("jpa.tbusuario")
 public class TbUsuarioFacadeREST extends AbstractFacade<TbUsuario> {

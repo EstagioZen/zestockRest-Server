@@ -19,11 +19,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbBemPermanente;
-
-/**
- *
- * @author Carlos Mochi
- */
 @Stateless
 @Path("jpa.tbbempermanente")
 public class TbBemPermanenteFacadeREST extends AbstractFacade<TbBemPermanente> {

@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbProdutoConsumo;
 
-/**
- *
- * @author gedsonfaria
- */
 @Stateless
 @Path("jpa.tbprodutoconsumo")
 public class TbProdutoConsumoFacadeREST extends AbstractFacade<TbProdutoConsumo> {

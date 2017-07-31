@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbFabricante;
 
-/**
- *
- * @author gedsonfaria
- */
 @Stateless
 @Path("jpa.tbfabricante")
 public class TbFabricanteFacadeREST extends AbstractFacade<TbFabricante> {

@@ -22,10 +22,6 @@ import javax.ws.rs.core.PathSegment;
 import jpa.TbFasesEmprestimoBemPermanente;
 import jpa.TbFasesEmprestimoBemPermanentePK;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Stateless
 @Path("jpa.tbfasesemprestimobempermanente")
 public class TbFasesEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbFasesEmprestimoBemPermanente> {

@@ -20,10 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbUnidade;
 
-/**
- *
- * @author gedsonfaria
- */
 @Stateless
 @Path("jpa.tbunidade")
 public class TbUnidadeFacadeREST extends AbstractFacade<TbUnidade> {

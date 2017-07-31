@@ -19,10 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Carlos Mochi
- */
 @Entity
 @Table(name = "tb_fases_emprestimo_bem_permanente")
 @XmlRootElement

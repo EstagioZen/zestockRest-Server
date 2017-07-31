@@ -14,10 +14,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author gedsonfaria
- */
 @Embeddable
 public class TbHistoricoConsumoPK implements Serializable {
 

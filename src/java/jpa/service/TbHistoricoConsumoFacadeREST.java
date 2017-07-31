@@ -22,10 +22,6 @@ import javax.ws.rs.core.PathSegment;
 import jpa.TbHistoricoConsumo;
 import jpa.TbHistoricoConsumoPK;
 
-/**
- *
- * @author gedsonfaria
- */
 @Stateless
 @Path("jpa.tbhistoricoconsumo")
 public class TbHistoricoConsumoFacadeREST extends AbstractFacade<TbHistoricoConsumo> {
