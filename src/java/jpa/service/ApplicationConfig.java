@@ -26,6 +26,18 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(jpa.service.CORSFilter.class);
+        resources.add(jpa.service.TbBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbConsumoFacadeREST.class);
+        resources.add(jpa.service.TbEmprestimoBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbEstadoBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbFabricanteFacadeREST.class);
+        resources.add(jpa.service.TbFasesEmprestimoBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbHistoricoConsumoFacadeREST.class);
+        resources.add(jpa.service.TbLocaisLotacaoBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbProdutoConsumoFacadeREST.class);
+        resources.add(jpa.service.TbStatusEmprestimoBemPermanenteFacadeREST.class);
+        resources.add(jpa.service.TbUnidadeFacadeREST.class);
+        resources.add(jpa.service.TbUsuarioFacadeREST.class);
     }
     
 }
