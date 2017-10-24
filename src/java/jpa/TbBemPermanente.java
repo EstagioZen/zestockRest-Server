@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TbBemPermanente.findByDescricaoBem", query = "SELECT t FROM TbBemPermanente t WHERE t.descricaoBem = :descricaoBem")
     , @NamedQuery(name = "TbBemPermanente.findByDtEntrada", query = "SELECT t FROM TbBemPermanente t WHERE t.dtEntrada = :dtEntrada")
     , @NamedQuery(name = "TbBemPermanente.findByObservacao", query = "SELECT t FROM TbBemPermanente t WHERE t.observacao = :observacao")
-    , @NamedQuery(name = "TbBemPermanente.findByIdNumPatrimonio", query = "SELECT t FROM TbBemPermanente t WHERE t.idNumPatrimonio = :idNumPatrimonio")})
+    , @NamedQuery(name = "TbBemPermanente.findByIdNumPatrimonio", query = "SELECT t FROM TbBemPermanente t WHERE t.numPatrimonio = :numPatrimonio")})
 public class TbBemPermanente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,8 +51,8 @@ public class TbBemPermanente implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_num_patrimonio")
-    private Integer idNumPatrimonio;
+    @Column(name = "num_patrimonio")
+    private Integer numPatrimonio;
     @JoinColumn(name = "id_estado_conservacao", referencedColumnName = "id_estado_bem_permanente")
     @ManyToOne
     private TbEstadoBemPermanente idEstadoConservacao;
@@ -62,18 +62,18 @@ public class TbBemPermanente implements Serializable {
     @JoinColumn(name = "id_co_responsavel", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idCoResponsavel;
-    @OneToMany(mappedBy = "idNumPatrimonio")
+    @OneToMany(mappedBy = "numPatrimonio")
     private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
 
     public TbBemPermanente() {
     }
 
-    public TbBemPermanente(Integer idNumPatrimonio) {
-        this.idNumPatrimonio = idNumPatrimonio;
+    public TbBemPermanente(Integer numPatrimonio) {
+        this.numPatrimonio = numPatrimonio;
     }
 
-    public TbBemPermanente(Integer idNumPatrimonio, String descricaoBem) {
-        this.idNumPatrimonio = idNumPatrimonio;
+    public TbBemPermanente(Integer numPatrimonio, String descricaoBem) {
+        this.numPatrimonio = numPatrimonio;
         this.descricaoBem = descricaoBem;
     }
 
@@ -102,11 +102,11 @@ public class TbBemPermanente implements Serializable {
     }
 
     public Integer getIdNumPatrimonio() {
-        return idNumPatrimonio;
+        return numPatrimonio;
     }
 
-    public void setIdNumPatrimonio(Integer idNumPatrimonio) {
-        this.idNumPatrimonio = idNumPatrimonio;
+    public void setIdNumPatrimonio(Integer numPatrimonio) {
+        this.numPatrimonio = numPatrimonio;
     }
 
     public TbEstadoBemPermanente getIdEstadoConservacao() {
@@ -145,7 +145,7 @@ public class TbBemPermanente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idNumPatrimonio != null ? idNumPatrimonio.hashCode() : 0);
+        hash += (numPatrimonio != null ? numPatrimonio.hashCode() : 0);
         return hash;
     }
 
@@ -156,7 +156,7 @@ public class TbBemPermanente implements Serializable {
             return false;
         }
         TbBemPermanente other = (TbBemPermanente) object;
-        if ((this.idNumPatrimonio == null && other.idNumPatrimonio != null) || (this.idNumPatrimonio != null && !this.idNumPatrimonio.equals(other.idNumPatrimonio))) {
+        if ((this.numPatrimonio == null && other.numPatrimonio != null) || (this.numPatrimonio != null && !this.numPatrimonio.equals(other.numPatrimonio))) {
             return false;
         }
         return true;
@@ -164,7 +164,7 @@ public class TbBemPermanente implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.TbBemPermanente[ idNumPatrimonio=" + idNumPatrimonio + " ]";
+        return "jpa.TbBemPermanente[ numPatrimonio=" + numPatrimonio + " ]";
     }
     
 }
