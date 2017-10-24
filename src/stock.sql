@@ -12,6 +12,17 @@ CREATE TABLE public.tb_usuario (
                 theme VARCHAR(40)
 );
 
+CREATE TABLE public.tb_roles (
+    id_role SERIAL PRIMARY KEY,
+    role VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE public.tb_user_roles (
+    id_usuario INTEGER REFERENCES tb_usuario,
+    id_role INTEGER REFERENCES tb_roles,
+    PRIMARY KEY(id_usuario,id_role)
+);
+
 -- bens permanentes (com num. patrimonio) (bom,ruim,otimo,...)
 CREATE TABLE public.tb_estado_bem_permanente (
     id_estado_bem_permanente VARCHAR(1) PRIMARY KEY,
