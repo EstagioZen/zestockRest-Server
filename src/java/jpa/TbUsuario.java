@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Entity
 @Table(name = "tb_usuario")
@@ -66,14 +67,12 @@ public class TbUsuario implements Serializable {
     @Size(max = 40)
     @Column(name = "theme")
     private String theme;
+    @ManyToMany(mappedBy = "tbUsuarioCollection")
+    private Collection<TbRoles> tbRolesCollection;
     @OneToMany(mappedBy = "idCoResponsavel")
     private Collection<TbBemPermanente> tbBemPermanenteCollection;
     @OneToMany(mappedBy = "idQuemRecebeu")
     private Collection<TbConsumo> tbConsumoCollection;
-    @OneToMany(mappedBy = "idResponsavel")
-    private Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection;
-    @OneToMany(mappedBy = "idSolicitante")
-    private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
     @OneToMany(mappedBy = "idQuemRetirou")
     private Collection<TbHistoricoConsumo> tbHistoricoConsumoCollection;
 
@@ -140,6 +139,15 @@ public class TbUsuario implements Serializable {
     }
 
     @XmlTransient
+    public Collection<TbRoles> getTbRolesCollection() {
+        return tbRolesCollection;
+    }
+
+    public void setTbRolesCollection(Collection<TbRoles> tbRolesCollection) {
+        this.tbRolesCollection = tbRolesCollection;
+    }
+
+    @XmlTransient
     public Collection<TbBemPermanente> getTbBemPermanenteCollection() {
         return tbBemPermanenteCollection;
     }
@@ -155,24 +163,6 @@ public class TbUsuario implements Serializable {
 
     public void setTbConsumoCollection(Collection<TbConsumo> tbConsumoCollection) {
         this.tbConsumoCollection = tbConsumoCollection;
-    }
-
-    @XmlTransient
-    public Collection<TbFasesEmprestimoBemPermanente> getTbFasesEmprestimoBemPermanenteCollection() {
-        return tbFasesEmprestimoBemPermanenteCollection;
-    }
-
-    public void setTbFasesEmprestimoBemPermanenteCollection(Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection) {
-        this.tbFasesEmprestimoBemPermanenteCollection = tbFasesEmprestimoBemPermanenteCollection;
-    }
-
-    @XmlTransient
-    public Collection<TbEmprestimoBemPermanente> getTbEmprestimoBemPermanenteCollection() {
-        return tbEmprestimoBemPermanenteCollection;
-    }
-
-    public void setTbEmprestimoBemPermanenteCollection(Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection) {
-        this.tbEmprestimoBemPermanenteCollection = tbEmprestimoBemPermanenteCollection;
     }
 
     @XmlTransient

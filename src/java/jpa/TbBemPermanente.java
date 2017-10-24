@@ -6,37 +6,46 @@
 package jpa;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedsonfaria
+ */
 @Entity
 @Table(name = "tb_bem_permanente")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbBemPermanente.findAll", query = "SELECT t FROM TbBemPermanente t")
+    , @NamedQuery(name = "TbBemPermanente.findByIdBemPermanente", query = "SELECT t FROM TbBemPermanente t WHERE t.idBemPermanente = :idBemPermanente")
     , @NamedQuery(name = "TbBemPermanente.findByDescricaoBem", query = "SELECT t FROM TbBemPermanente t WHERE t.descricaoBem = :descricaoBem")
     , @NamedQuery(name = "TbBemPermanente.findByDtEntrada", query = "SELECT t FROM TbBemPermanente t WHERE t.dtEntrada = :dtEntrada")
     , @NamedQuery(name = "TbBemPermanente.findByObservacao", query = "SELECT t FROM TbBemPermanente t WHERE t.observacao = :observacao")
-    , @NamedQuery(name = "TbBemPermanente.findByIdNumPatrimonio", query = "SELECT t FROM TbBemPermanente t WHERE t.numPatrimonio = :numPatrimonio")})
+    , @NamedQuery(name = "TbBemPermanente.findByNumPatrimonio", query = "SELECT t FROM TbBemPermanente t WHERE t.numPatrimonio = :numPatrimonio")})
 public class TbBemPermanente implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_bem_permanente")
+    private Integer idBemPermanente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -48,11 +57,9 @@ public class TbBemPermanente implements Serializable {
     @Size(max = 255)
     @Column(name = "observacao")
     private String observacao;
-    @Id
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 8)
     @Column(name = "num_patrimonio")
-    private Integer numPatrimonio;
+    private String numPatrimonio;
     @JoinColumn(name = "id_estado_conservacao", referencedColumnName = "id_estado_bem_permanente")
     @ManyToOne
     private TbEstadoBemPermanente idEstadoConservacao;
@@ -62,19 +69,25 @@ public class TbBemPermanente implements Serializable {
     @JoinColumn(name = "id_co_responsavel", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idCoResponsavel;
-    @OneToMany(mappedBy = "numPatrimonio")
-    private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
 
     public TbBemPermanente() {
     }
 
-    public TbBemPermanente(Integer numPatrimonio) {
-        this.numPatrimonio = numPatrimonio;
+    public TbBemPermanente(Integer idBemPermanente) {
+        this.idBemPermanente = idBemPermanente;
     }
 
-    public TbBemPermanente(Integer numPatrimonio, String descricaoBem) {
-        this.numPatrimonio = numPatrimonio;
+    public TbBemPermanente(Integer idBemPermanente, String descricaoBem) {
+        this.idBemPermanente = idBemPermanente;
         this.descricaoBem = descricaoBem;
+    }
+
+    public Integer getIdBemPermanente() {
+        return idBemPermanente;
+    }
+
+    public void setIdBemPermanente(Integer idBemPermanente) {
+        this.idBemPermanente = idBemPermanente;
     }
 
     public String getDescricaoBem() {
@@ -101,11 +114,11 @@ public class TbBemPermanente implements Serializable {
         this.observacao = observacao;
     }
 
-    public Integer getIdNumPatrimonio() {
+    public String getNumPatrimonio() {
         return numPatrimonio;
     }
 
-    public void setIdNumPatrimonio(Integer numPatrimonio) {
+    public void setNumPatrimonio(String numPatrimonio) {
         this.numPatrimonio = numPatrimonio;
     }
 
@@ -133,19 +146,10 @@ public class TbBemPermanente implements Serializable {
         this.idCoResponsavel = idCoResponsavel;
     }
 
-    @XmlTransient
-    public Collection<TbEmprestimoBemPermanente> getTbEmprestimoBemPermanenteCollection() {
-        return tbEmprestimoBemPermanenteCollection;
-    }
-
-    public void setTbEmprestimoBemPermanenteCollection(Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection) {
-        this.tbEmprestimoBemPermanenteCollection = tbEmprestimoBemPermanenteCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (numPatrimonio != null ? numPatrimonio.hashCode() : 0);
+        hash += (idBemPermanente != null ? idBemPermanente.hashCode() : 0);
         return hash;
     }
 
@@ -156,7 +160,7 @@ public class TbBemPermanente implements Serializable {
             return false;
         }
         TbBemPermanente other = (TbBemPermanente) object;
-        if ((this.numPatrimonio == null && other.numPatrimonio != null) || (this.numPatrimonio != null && !this.numPatrimonio.equals(other.numPatrimonio))) {
+        if ((this.idBemPermanente == null && other.idBemPermanente != null) || (this.idBemPermanente != null && !this.idBemPermanente.equals(other.idBemPermanente))) {
             return false;
         }
         return true;
@@ -164,7 +168,7 @@ public class TbBemPermanente implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.TbBemPermanente[ numPatrimonio=" + numPatrimonio + " ]";
+        return "jpa.TbBemPermanente[ idBemPermanente=" + idBemPermanente + " ]";
     }
     
 }

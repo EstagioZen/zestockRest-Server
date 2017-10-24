@@ -19,11 +19,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbBemPermanente;
+
+/**
+ *
+ * @author gedsonfaria
+ */
 @Stateless
 @Path("jpa.tbbempermanente")
 public class TbBemPermanenteFacadeREST extends AbstractFacade<TbBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbBemPermanenteFacadeREST() {
@@ -31,10 +36,10 @@ public class TbBemPermanenteFacadeREST extends AbstractFacade<TbBemPermanente> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbBemPermanente entity) {
+    public TbBemPermanente create2(TbBemPermanente entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT

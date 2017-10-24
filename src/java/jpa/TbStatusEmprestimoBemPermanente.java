@@ -6,7 +6,6 @@
 package jpa;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Entity
 @Table(name = "tb_status_emprestimo_bem_permanente")
@@ -43,8 +40,6 @@ public class TbStatusEmprestimoBemPermanente implements Serializable {
     @Size(max = 64)
     @Column(name = "descricao")
     private String descricao;
-    @OneToMany(mappedBy = "idStatusEmprestimo")
-    private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
 
     public TbStatusEmprestimoBemPermanente() {
     }
@@ -67,15 +62,6 @@ public class TbStatusEmprestimoBemPermanente implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    @XmlTransient
-    public Collection<TbEmprestimoBemPermanente> getTbEmprestimoBemPermanenteCollection() {
-        return tbEmprestimoBemPermanenteCollection;
-    }
-
-    public void setTbEmprestimoBemPermanenteCollection(Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection) {
-        this.tbEmprestimoBemPermanenteCollection = tbEmprestimoBemPermanenteCollection;
     }
 
     @Override

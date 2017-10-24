@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbEstadoBemPermanente;
 
+/**
+ *
+ * @author gedsonfaria
+ */
 @Stateless
 @Path("jpa.tbestadobempermanente")
 public class TbEstadoBemPermanenteFacadeREST extends AbstractFacade<TbEstadoBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbEstadoBemPermanenteFacadeREST() {
@@ -32,29 +36,29 @@ public class TbEstadoBemPermanenteFacadeREST extends AbstractFacade<TbEstadoBemP
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbEstadoBemPermanente entity) {
+    public TbEstadoBemPermanente create2(TbEstadoBemPermanente entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, TbEstadoBemPermanente entity) {
+    public void edit(@PathParam("id") Integer id, TbEstadoBemPermanente entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbEstadoBemPermanente find(@PathParam("id") String id) {
+    public TbEstadoBemPermanente find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 

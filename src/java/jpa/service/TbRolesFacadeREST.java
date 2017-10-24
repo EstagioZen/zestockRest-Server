@@ -18,34 +18,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import jpa.TbFasesEmprestimoBemPermanente;
+import jpa.TbRoles;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Stateless
-@Path("jpa.tbfasesemprestimobempermanente")
-public class TbFasesEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbFasesEmprestimoBemPermanente> {
+@Path("jpa.tbroles")
+public class TbRolesFacadeREST extends AbstractFacade<TbRoles> {
 
     @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
-    public TbFasesEmprestimoBemPermanenteFacadeREST() {
-        super(TbFasesEmprestimoBemPermanente.class);
+    public TbRolesFacadeREST() {
+        super(TbRoles.class);
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbFasesEmprestimoBemPermanente entity) {
+    public TbRoles create2(TbRoles entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, TbFasesEmprestimoBemPermanente entity) {
+    public void edit(@PathParam("id") Integer id, TbRoles entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class TbFasesEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbF
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbFasesEmprestimoBemPermanente find(@PathParam("id") Integer id) {
+    public TbRoles find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<TbFasesEmprestimoBemPermanente> findAll() {
+    public List<TbRoles> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<TbFasesEmprestimoBemPermanente> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<TbRoles> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

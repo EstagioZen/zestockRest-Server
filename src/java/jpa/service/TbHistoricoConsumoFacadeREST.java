@@ -22,7 +22,7 @@ import jpa.TbHistoricoConsumo;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Stateless
 @Path("jpa.tbhistoricoconsumo")
@@ -36,10 +36,10 @@ public class TbHistoricoConsumoFacadeREST extends AbstractFacade<TbHistoricoCons
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbHistoricoConsumo entity) {
+    public TbHistoricoConsumo create2(TbHistoricoConsumo entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT

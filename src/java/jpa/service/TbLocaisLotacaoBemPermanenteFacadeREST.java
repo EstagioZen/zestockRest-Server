@@ -22,7 +22,7 @@ import jpa.TbLocaisLotacaoBemPermanente;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Stateless
 @Path("jpa.tblocaislotacaobempermanente")
@@ -36,10 +36,10 @@ public class TbLocaisLotacaoBemPermanenteFacadeREST extends AbstractFacade<TbLoc
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbLocaisLotacaoBemPermanente entity) {
+    public TbLocaisLotacaoBemPermanente create2(TbLocaisLotacaoBemPermanente entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT

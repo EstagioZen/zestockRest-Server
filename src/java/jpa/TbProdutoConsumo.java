@@ -24,6 +24,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedsonfaria
+ */
 @Entity
 @Table(name = "tb_produto_consumo")
 @XmlRootElement
@@ -41,8 +45,9 @@ public class TbProdutoConsumo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_produto_consumo")
     private Integer idProdutoConsumo;
+    @Size(max = 32)
     @Column(name = "codigo_barra")
-    private Integer codigoBarra;
+    private String codigoBarra;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -77,11 +82,11 @@ public class TbProdutoConsumo implements Serializable {
         this.idProdutoConsumo = idProdutoConsumo;
     }
 
-    public Integer getCodigoBarra() {
+    public String getCodigoBarra() {
         return codigoBarra;
     }
 
-    public void setCodigoBarra(Integer codigoBarra) {
+    public void setCodigoBarra(String codigoBarra) {
         this.codigoBarra = codigoBarra;
     }
 

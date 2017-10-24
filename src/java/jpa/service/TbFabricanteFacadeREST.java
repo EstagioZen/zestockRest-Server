@@ -22,7 +22,7 @@ import jpa.TbFabricante;
 
 /**
  *
- * @author gedson
+ * @author gedsonfaria
  */
 @Stateless
 @Path("jpa.tbfabricante")
@@ -36,10 +36,10 @@ public class TbFabricanteFacadeREST extends AbstractFacade<TbFabricante> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbFabricante entity) {
+    public TbFabricante create2(TbFabricante entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT
