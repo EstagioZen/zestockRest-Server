@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbUsuario;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbusuario")
 public class TbUsuarioFacadeREST extends AbstractFacade<TbUsuario> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbUsuarioFacadeREST() {

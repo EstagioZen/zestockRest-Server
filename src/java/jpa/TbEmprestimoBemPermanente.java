@@ -6,10 +6,8 @@
 package jpa;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +17,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedson
+ */
 @Entity
 @Table(name = "tb_emprestimo_bem_permanente")
 @XmlRootElement
@@ -51,13 +51,14 @@ public class TbEmprestimoBemPermanente implements Serializable {
     @Column(name = "justificativa")
     private String justificativa;
     @Column(name = "dt_prevista_devolucao")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dtPrevistaDevolucao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEmprestimoBemPermanente")
-    private Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection;
-    @JoinColumn(name = "id_num_patrimonio", referencedColumnName = "id_num_patrimonio")
+    @JoinColumn(name = "id_num_patrimonio", referencedColumnName = "id_bem_permanente")
     @ManyToOne
     private TbBemPermanente idNumPatrimonio;
+    @JoinColumn(name = "id_status_emprestimo", referencedColumnName = "id_status")
+    @ManyToOne
+    private TbStatusEmprestimoBemPermanente idStatusEmprestimo;
     @JoinColumn(name = "id_solicitante", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idSolicitante;
@@ -101,21 +102,20 @@ public class TbEmprestimoBemPermanente implements Serializable {
         this.dtPrevistaDevolucao = dtPrevistaDevolucao;
     }
 
-    @XmlTransient
-    public Collection<TbFasesEmprestimoBemPermanente> getTbFasesEmprestimoBemPermanenteCollection() {
-        return tbFasesEmprestimoBemPermanenteCollection;
-    }
-
-    public void setTbFasesEmprestimoBemPermanenteCollection(Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection) {
-        this.tbFasesEmprestimoBemPermanenteCollection = tbFasesEmprestimoBemPermanenteCollection;
-    }
-
     public TbBemPermanente getIdNumPatrimonio() {
         return idNumPatrimonio;
     }
 
     public void setIdNumPatrimonio(TbBemPermanente idNumPatrimonio) {
         this.idNumPatrimonio = idNumPatrimonio;
+    }
+
+    public TbStatusEmprestimoBemPermanente getIdStatusEmprestimo() {
+        return idStatusEmprestimo;
+    }
+
+    public void setIdStatusEmprestimo(TbStatusEmprestimoBemPermanente idStatusEmprestimo) {
+        this.idStatusEmprestimo = idStatusEmprestimo;
     }
 
     public TbUsuario getIdSolicitante() {

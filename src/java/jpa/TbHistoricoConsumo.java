@@ -7,43 +7,54 @@ package jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author gedsonfaria
+ * @author gedson
  */
 @Entity
 @Table(name = "tb_historico_consumo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbHistoricoConsumo.findAll", query = "SELECT t FROM TbHistoricoConsumo t")
-    , @NamedQuery(name = "TbHistoricoConsumo.findByIdMaterialRetirado", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.tbHistoricoConsumoPK.idMaterialRetirado = :idMaterialRetirado")
+    , @NamedQuery(name = "TbHistoricoConsumo.findByIdHistoricoConsumo", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.idHistoricoConsumo = :idHistoricoConsumo")
     , @NamedQuery(name = "TbHistoricoConsumo.findByQuantidadeRetirada", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.quantidadeRetirada = :quantidadeRetirada")
     , @NamedQuery(name = "TbHistoricoConsumo.findByMotivoRetirada", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.motivoRetirada = :motivoRetirada")
-    , @NamedQuery(name = "TbHistoricoConsumo.findByDtRetirada", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.tbHistoricoConsumoPK.dtRetirada = :dtRetirada")})
+    , @NamedQuery(name = "TbHistoricoConsumo.findByDtRetirada", query = "SELECT t FROM TbHistoricoConsumo t WHERE t.dtRetirada = :dtRetirada")})
 public class TbHistoricoConsumo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected TbHistoricoConsumoPK tbHistoricoConsumoPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_historico_consumo")
+    private Long idHistoricoConsumo;
     @Column(name = "quantidade_retirada")
     private Integer quantidadeRetirada;
     @Size(max = 255)
     @Column(name = "motivo_retirada")
     private String motivoRetirada;
-    @JoinColumn(name = "id_material_retirado", referencedColumnName = "id_consumo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TbConsumo tbConsumo;
+    @Column(name = "dt_retirada")
+    @Temporal(TemporalType.DATE)
+    private Date dtRetirada;
+    @JoinColumn(name = "id_material_retirado", referencedColumnName = "id_consumo")
+    @ManyToOne
+    private TbConsumo idMaterialRetirado;
     @JoinColumn(name = "id_quem_retirou", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idQuemRetirou;
@@ -51,20 +62,16 @@ public class TbHistoricoConsumo implements Serializable {
     public TbHistoricoConsumo() {
     }
 
-    public TbHistoricoConsumo(TbHistoricoConsumoPK tbHistoricoConsumoPK) {
-        this.tbHistoricoConsumoPK = tbHistoricoConsumoPK;
+    public TbHistoricoConsumo(Long idHistoricoConsumo) {
+        this.idHistoricoConsumo = idHistoricoConsumo;
     }
 
-    public TbHistoricoConsumo(int idMaterialRetirado, Date dtRetirada) {
-        this.tbHistoricoConsumoPK = new TbHistoricoConsumoPK(idMaterialRetirado, dtRetirada);
+    public Long getIdHistoricoConsumo() {
+        return idHistoricoConsumo;
     }
 
-    public TbHistoricoConsumoPK getTbHistoricoConsumoPK() {
-        return tbHistoricoConsumoPK;
-    }
-
-    public void setTbHistoricoConsumoPK(TbHistoricoConsumoPK tbHistoricoConsumoPK) {
-        this.tbHistoricoConsumoPK = tbHistoricoConsumoPK;
+    public void setIdHistoricoConsumo(Long idHistoricoConsumo) {
+        this.idHistoricoConsumo = idHistoricoConsumo;
     }
 
     public Integer getQuantidadeRetirada() {
@@ -83,12 +90,20 @@ public class TbHistoricoConsumo implements Serializable {
         this.motivoRetirada = motivoRetirada;
     }
 
-    public TbConsumo getTbConsumo() {
-        return tbConsumo;
+    public Date getDtRetirada() {
+        return dtRetirada;
     }
 
-    public void setTbConsumo(TbConsumo tbConsumo) {
-        this.tbConsumo = tbConsumo;
+    public void setDtRetirada(Date dtRetirada) {
+        this.dtRetirada = dtRetirada;
+    }
+
+    public TbConsumo getIdMaterialRetirado() {
+        return idMaterialRetirado;
+    }
+
+    public void setIdMaterialRetirado(TbConsumo idMaterialRetirado) {
+        this.idMaterialRetirado = idMaterialRetirado;
     }
 
     public TbUsuario getIdQuemRetirou() {
@@ -102,7 +117,7 @@ public class TbHistoricoConsumo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tbHistoricoConsumoPK != null ? tbHistoricoConsumoPK.hashCode() : 0);
+        hash += (idHistoricoConsumo != null ? idHistoricoConsumo.hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +128,7 @@ public class TbHistoricoConsumo implements Serializable {
             return false;
         }
         TbHistoricoConsumo other = (TbHistoricoConsumo) object;
-        if ((this.tbHistoricoConsumoPK == null && other.tbHistoricoConsumoPK != null) || (this.tbHistoricoConsumoPK != null && !this.tbHistoricoConsumoPK.equals(other.tbHistoricoConsumoPK))) {
+        if ((this.idHistoricoConsumo == null && other.idHistoricoConsumo != null) || (this.idHistoricoConsumo != null && !this.idHistoricoConsumo.equals(other.idHistoricoConsumo))) {
             return false;
         }
         return true;
@@ -121,7 +136,7 @@ public class TbHistoricoConsumo implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.TbHistoricoConsumo[ tbHistoricoConsumoPK=" + tbHistoricoConsumoPK + " ]";
+        return "jpa.TbHistoricoConsumo[ idHistoricoConsumo=" + idHistoricoConsumo + " ]";
     }
     
 }

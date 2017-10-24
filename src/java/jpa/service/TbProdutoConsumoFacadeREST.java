@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbProdutoConsumo;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbprodutoconsumo")
 public class TbProdutoConsumoFacadeREST extends AbstractFacade<TbProdutoConsumo> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbProdutoConsumoFacadeREST() {
@@ -32,10 +36,10 @@ public class TbProdutoConsumoFacadeREST extends AbstractFacade<TbProdutoConsumo>
     }
 
     @POST
+    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbProdutoConsumo create2(TbProdutoConsumo entity) {
+    public void create(TbProdutoConsumo entity) {
         super.create(entity);
-        return entity;
     }
 
     @PUT

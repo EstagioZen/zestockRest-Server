@@ -18,69 +18,48 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import jpa.TbHistoricoConsumo;
-import jpa.TbHistoricoConsumoPK;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbhistoricoconsumo")
 public class TbHistoricoConsumoFacadeREST extends AbstractFacade<TbHistoricoConsumo> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
-
-    private TbHistoricoConsumoPK getPrimaryKey(PathSegment pathSegment) {
-        /*
-         * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;idMaterialRetirado=idMaterialRetiradoValue;dtRetirada=dtRetiradaValue'.
-         * Here 'somePath' is a result of getPath() method invocation and
-         * it is ignored in the following code.
-         * Matrix parameters are used as field names to build a primary key instance.
-         */
-        jpa.TbHistoricoConsumoPK key = new jpa.TbHistoricoConsumoPK();
-        javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> idMaterialRetirado = map.get("idMaterialRetirado");
-        if (idMaterialRetirado != null && !idMaterialRetirado.isEmpty()) {
-            key.setIdMaterialRetirado(new java.lang.Integer(idMaterialRetirado.get(0)));
-        }
-        java.util.List<String> dtRetirada = map.get("dtRetirada");
-        if (dtRetirada != null && !dtRetirada.isEmpty()) {
-            key.setDtRetirada(new java.util.Date(dtRetirada.get(0)));
-        }
-        return key;
-    }
 
     public TbHistoricoConsumoFacadeREST() {
         super(TbHistoricoConsumo.class);
     }
 
     @POST
+    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbHistoricoConsumo create2(TbHistoricoConsumo entity) {
+    public void create(TbHistoricoConsumo entity) {
         super.create(entity);
-        return entity;
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, TbHistoricoConsumo entity) {
+    public void edit(@PathParam("id") Long id, TbHistoricoConsumo entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        jpa.TbHistoricoConsumoPK key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    public void remove(@PathParam("id") Long id) {
+        super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbHistoricoConsumo find(@PathParam("id") PathSegment id) {
-        jpa.TbHistoricoConsumoPK key = getPrimaryKey(id);
-        return super.find(key);
+    public TbHistoricoConsumo find(@PathParam("id") Long id) {
+        return super.find(id);
     }
 
     @GET

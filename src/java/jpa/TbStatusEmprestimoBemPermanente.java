@@ -8,19 +8,23 @@ package jpa;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedson
+ */
 @Entity
 @Table(name = "tb_status_emprestimo_bem_permanente")
 @XmlRootElement
@@ -32,29 +36,28 @@ public class TbStatusEmprestimoBemPermanente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Column(name = "id_status")
-    private String idStatus;
+    private Integer idStatus;
     @Size(max = 64)
     @Column(name = "descricao")
     private String descricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbStatusEmprestimoBemPermanente")
-    private Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection;
+    @OneToMany(mappedBy = "idStatusEmprestimo")
+    private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
 
     public TbStatusEmprestimoBemPermanente() {
     }
 
-    public TbStatusEmprestimoBemPermanente(String idStatus) {
+    public TbStatusEmprestimoBemPermanente(Integer idStatus) {
         this.idStatus = idStatus;
     }
 
-    public String getIdStatus() {
+    public Integer getIdStatus() {
         return idStatus;
     }
 
-    public void setIdStatus(String idStatus) {
+    public void setIdStatus(Integer idStatus) {
         this.idStatus = idStatus;
     }
 
@@ -67,12 +70,12 @@ public class TbStatusEmprestimoBemPermanente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TbFasesEmprestimoBemPermanente> getTbFasesEmprestimoBemPermanenteCollection() {
-        return tbFasesEmprestimoBemPermanenteCollection;
+    public Collection<TbEmprestimoBemPermanente> getTbEmprestimoBemPermanenteCollection() {
+        return tbEmprestimoBemPermanenteCollection;
     }
 
-    public void setTbFasesEmprestimoBemPermanenteCollection(Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection) {
-        this.tbFasesEmprestimoBemPermanenteCollection = tbFasesEmprestimoBemPermanenteCollection;
+    public void setTbEmprestimoBemPermanenteCollection(Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection) {
+        this.tbEmprestimoBemPermanenteCollection = tbEmprestimoBemPermanenteCollection;
     }
 
     @Override

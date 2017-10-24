@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbStatusEmprestimoBemPermanente;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbstatusemprestimobempermanente")
 public class TbStatusEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbStatusEmprestimoBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbStatusEmprestimoBemPermanenteFacadeREST() {
@@ -41,20 +45,20 @@ public class TbStatusEmprestimoBemPermanenteFacadeREST extends AbstractFacade<Tb
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") String id, TbStatusEmprestimoBemPermanente entity) {
+    public void edit(@PathParam("id") Integer id, TbStatusEmprestimoBemPermanente entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") String id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbStatusEmprestimoBemPermanente find(@PathParam("id") String id) {
+    public TbStatusEmprestimoBemPermanente find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 

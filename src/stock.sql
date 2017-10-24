@@ -11,7 +11,6 @@ CREATE TABLE public.tb_usuario (
 --thema das janelas
                 theme VARCHAR(40)
 );
-
 CREATE TABLE public.tb_roles (
     id_role SERIAL PRIMARY KEY,
     role VARCHAR(64) NOT NULL
@@ -22,10 +21,9 @@ CREATE TABLE public.tb_user_roles (
     id_role INTEGER REFERENCES tb_roles,
     PRIMARY KEY(id_usuario,id_role)
 );
-
 -- bens permanentes (com num. patrimonio) (bom,ruim,otimo,...)
 CREATE TABLE public.tb_estado_bem_permanente (
-    id_estado_bem_permanente VARCHAR(1) PRIMARY KEY,
+    id_estado_bem_permanente SERIAL PRIMARY KEY,
     descricao_estado_fisico VARCHAR(64)
 );
 -- exemplo de locais: CPCX, LAPS, Lab. 01
@@ -43,8 +41,9 @@ CREATE TABLE public.tb_bem_permanente (
                 sala_alocacao INTEGER REFERENCES tb_locais_lotacao_bem_permanente,
                 observacao VARCHAR(255),
                 num_patrimonio VARCHAR(8),
-                id_estado_conservacao VARCHAR(1) REFERENCES tb_estado_bem_permanente,
+                id_estado_conservacao INTEGER REFERENCES tb_estado_bem_permanente,
                 id_co_responsavel INTEGER REFERENCES tb_usuario
+
 );
 -- cria uma solicitacao de emprestimo
 CREATE TABLE public.tb_emprestimo_bem_permanente (
@@ -53,22 +52,24 @@ CREATE TABLE public.tb_emprestimo_bem_permanente (
                 justificativa VARCHAR(255),
                 dt_prevista_devolucao DATE,
                 id_solicitante INTEGER REFERENCES tb_usuario,
-                id_num_patrimonio INTEGER REFERENCES tb_bem_permanente
+                id_num_patrimonio INTEGER REFERENCES tb_bem_permanente,
+		id_status_emprestimo INTEGER REFERENCES tb_status_emprestimo_bem_permanente
                     ON DELETE CASCADE
                     ON UPDATE CASCADE
 );
 -- status: pedido, autorizado, retirado, devolvido, nao devolvido na data
 -- lista de combobox
 CREATE TABLE public.tb_status_emprestimo_bem_permanente (
-    id_status VARCHAR(1) PRIMARY KEY,
+    id_status SERIAL PRIMARY KEY,
     descricao VARCHAR(64)
 );
 CREATE TABLE public.tb_fases_emprestimo_bem_permanente (
+    id_fases_emprestimo SERIAL PRIMARY KEY,
     id_pedido_emprestimo INTEGER REFERENCES tb_emprestimo_bem_permanente,  
     dt_status DATE,
-    id_status VARCHAR(1) REFERENCES tb_status_emprestimo_bem_permanente,
-    id_responsavel INTEGER REFERENCES tb_usuario, -- quem realizou parte da etapa
-    PRIMARY KEY(id_pedido_emprestimo,id_status) --
+    id_status INTEGER REFERENCES tb_status_emprestimo_bem_permanente,
+    id_responsavel INTEGER REFERENCES tb_usuario -- quem realizou parte da etapa
+     --
 );
 
 --bens de consumo
@@ -105,14 +106,14 @@ CREATE TABLE public.tb_consumo (
 );
 -- armazena o historico de movimento, quanto de cada produto foi retirado ou devolvido ao estoque
 CREATE TABLE public.tb_historico_consumo (
+                id_historico_consumo BIGSERIAL PRIMARY KEY,
                 id_material_retirado INTEGER REFERENCES tb_consumo
                     ON DELETE CASCADE
                     ON UPDATE CASCADE,
                 quantidade_retirada INTEGER,
 		motivo_retirada VARCHAR(255),
                 id_quem_retirou INTEGER REFERENCES tb_usuario,
-		dt_retirada DATE,
-                PRIMARY KEY(id_material_retirado,dt_retirada)
+		dt_retirada DATE
 );
 
 -- 

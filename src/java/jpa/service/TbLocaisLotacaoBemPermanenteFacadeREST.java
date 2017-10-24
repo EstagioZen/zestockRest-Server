@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbLocaisLotacaoBemPermanente;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tblocaislotacaobempermanente")
 public class TbLocaisLotacaoBemPermanenteFacadeREST extends AbstractFacade<TbLocaisLotacaoBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbLocaisLotacaoBemPermanenteFacadeREST() {

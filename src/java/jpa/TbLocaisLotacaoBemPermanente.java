@@ -21,6 +21,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedson
+ */
 @Entity
 @Table(name = "tb_locais_lotacao_bem_permanente")
 @XmlRootElement

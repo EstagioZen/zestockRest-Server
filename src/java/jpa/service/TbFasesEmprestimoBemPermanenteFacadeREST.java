@@ -18,37 +18,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import jpa.TbFasesEmprestimoBemPermanente;
-import jpa.TbFasesEmprestimoBemPermanentePK;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbfasesemprestimobempermanente")
 public class TbFasesEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbFasesEmprestimoBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
-
-    private TbFasesEmprestimoBemPermanentePK getPrimaryKey(PathSegment pathSegment) {
-        /*
-         * pathSemgent represents a URI path segment and any associated matrix parameters.
-         * URI path part is supposed to be in form of 'somePath;idPedidoEmprestimo=idPedidoEmprestimoValue;idStatus=idStatusValue'.
-         * Here 'somePath' is a result of getPath() method invocation and
-         * it is ignored in the following code.
-         * Matrix parameters are used as field names to build a primary key instance.
-         */
-        jpa.TbFasesEmprestimoBemPermanentePK key = new jpa.TbFasesEmprestimoBemPermanentePK();
-        javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-        java.util.List<String> idPedidoEmprestimo = map.get("idPedidoEmprestimo");
-        if (idPedidoEmprestimo != null && !idPedidoEmprestimo.isEmpty()) {
-            key.setIdPedidoEmprestimo(new java.lang.Integer(idPedidoEmprestimo.get(0)));
-        }
-        java.util.List<String> idStatus = map.get("idStatus");
-        if (idStatus != null && !idStatus.isEmpty()) {
-            key.setIdStatus(idStatus.get(0));
-        }
-        return key;
-    }
 
     public TbFasesEmprestimoBemPermanenteFacadeREST() {
         super(TbFasesEmprestimoBemPermanente.class);
@@ -64,23 +45,21 @@ public class TbFasesEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbF
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") PathSegment id, TbFasesEmprestimoBemPermanente entity) {
+    public void edit(@PathParam("id") Integer id, TbFasesEmprestimoBemPermanente entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") PathSegment id) {
-        jpa.TbFasesEmprestimoBemPermanentePK key = getPrimaryKey(id);
-        super.remove(super.find(key));
+    public void remove(@PathParam("id") Integer id) {
+        super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbFasesEmprestimoBemPermanente find(@PathParam("id") PathSegment id) {
-        jpa.TbFasesEmprestimoBemPermanentePK key = getPrimaryKey(id);
-        return super.find(key);
+    public TbFasesEmprestimoBemPermanente find(@PathParam("id") Integer id) {
+        return super.find(id);
     }
 
     @GET

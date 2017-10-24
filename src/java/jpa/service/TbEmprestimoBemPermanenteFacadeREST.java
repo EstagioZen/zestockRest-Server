@@ -20,11 +20,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.TbEmprestimoBemPermanente;
 
+/**
+ *
+ * @author gedson
+ */
 @Stateless
 @Path("jpa.tbemprestimobempermanente")
 public class TbEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbEmprestimoBemPermanente> {
 
-    @PersistenceContext(unitName = "EstoqueRESTPU")
+    @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
     public TbEmprestimoBemPermanenteFacadeREST() {

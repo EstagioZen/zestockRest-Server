@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +25,10 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author gedson
+ */
 @Entity
 @Table(name = "tb_consumo")
 @XmlRootElement
@@ -53,7 +56,7 @@ public class TbConsumo implements Serializable {
     @Column(name = "quantidade_em_estoque")
     private Integer quantidadeEmEstoque;
     @Column(name = "dt_quando_recebeu")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dtQuandoRecebeu;
     @JoinColumn(name = "id_fabricante", referencedColumnName = "id_fabricante")
     @ManyToOne
@@ -64,7 +67,7 @@ public class TbConsumo implements Serializable {
     @JoinColumn(name = "id_quem_recebeu", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idQuemRecebeu;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbConsumo")
+    @OneToMany(mappedBy = "idMaterialRetirado")
     private Collection<TbHistoricoConsumo> tbHistoricoConsumoCollection;
 
     public TbConsumo() {

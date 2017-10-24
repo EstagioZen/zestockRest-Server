@@ -7,9 +7,12 @@ package jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,28 +22,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author gedson
+ */
 @Entity
 @Table(name = "tb_fases_emprestimo_bem_permanente")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findAll", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t")
-    , @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findByIdPedidoEmprestimo", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t WHERE t.tbFasesEmprestimoBemPermanentePK.idPedidoEmprestimo = :idPedidoEmprestimo")
-    , @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findByDtStatus", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t WHERE t.dtStatus = :dtStatus")
-    , @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findByIdStatus", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t WHERE t.tbFasesEmprestimoBemPermanentePK.idStatus = :idStatus")})
+    , @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findByIdFasesEmprestimo", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t WHERE t.idFasesEmprestimo = :idFasesEmprestimo")
+    , @NamedQuery(name = "TbFasesEmprestimoBemPermanente.findByDtStatus", query = "SELECT t FROM TbFasesEmprestimoBemPermanente t WHERE t.dtStatus = :dtStatus")})
 public class TbFasesEmprestimoBemPermanente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected TbFasesEmprestimoBemPermanentePK tbFasesEmprestimoBemPermanentePK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_fases_emprestimo")
+    private Integer idFasesEmprestimo;
     @Column(name = "dt_status")
     @Temporal(TemporalType.DATE)
     private Date dtStatus;
-    @JoinColumn(name = "id_pedido_emprestimo", referencedColumnName = "id_pedido_emprestimo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TbEmprestimoBemPermanente tbEmprestimoBemPermanente;
-    @JoinColumn(name = "id_status", referencedColumnName = "id_status", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TbStatusEmprestimoBemPermanente tbStatusEmprestimoBemPermanente;
+    @JoinColumn(name = "id_pedido_emprestimo", referencedColumnName = "id_pedido_emprestimo")
+    @ManyToOne
+    private TbEmprestimoBemPermanente idPedidoEmprestimo;
+    @JoinColumn(name = "id_status", referencedColumnName = "id_status")
+    @ManyToOne
+    private TbStatusEmprestimoBemPermanente idStatus;
     @JoinColumn(name = "id_responsavel", referencedColumnName = "id_usuario")
     @ManyToOne
     private TbUsuario idResponsavel;
@@ -48,20 +57,16 @@ public class TbFasesEmprestimoBemPermanente implements Serializable {
     public TbFasesEmprestimoBemPermanente() {
     }
 
-    public TbFasesEmprestimoBemPermanente(TbFasesEmprestimoBemPermanentePK tbFasesEmprestimoBemPermanentePK) {
-        this.tbFasesEmprestimoBemPermanentePK = tbFasesEmprestimoBemPermanentePK;
+    public TbFasesEmprestimoBemPermanente(Integer idFasesEmprestimo) {
+        this.idFasesEmprestimo = idFasesEmprestimo;
     }
 
-    public TbFasesEmprestimoBemPermanente(int idPedidoEmprestimo, String idStatus) {
-        this.tbFasesEmprestimoBemPermanentePK = new TbFasesEmprestimoBemPermanentePK(idPedidoEmprestimo, idStatus);
+    public Integer getIdFasesEmprestimo() {
+        return idFasesEmprestimo;
     }
 
-    public TbFasesEmprestimoBemPermanentePK getTbFasesEmprestimoBemPermanentePK() {
-        return tbFasesEmprestimoBemPermanentePK;
-    }
-
-    public void setTbFasesEmprestimoBemPermanentePK(TbFasesEmprestimoBemPermanentePK tbFasesEmprestimoBemPermanentePK) {
-        this.tbFasesEmprestimoBemPermanentePK = tbFasesEmprestimoBemPermanentePK;
+    public void setIdFasesEmprestimo(Integer idFasesEmprestimo) {
+        this.idFasesEmprestimo = idFasesEmprestimo;
     }
 
     public Date getDtStatus() {
@@ -72,20 +77,20 @@ public class TbFasesEmprestimoBemPermanente implements Serializable {
         this.dtStatus = dtStatus;
     }
 
-    public TbEmprestimoBemPermanente getTbEmprestimoBemPermanente() {
-        return tbEmprestimoBemPermanente;
+    public TbEmprestimoBemPermanente getIdPedidoEmprestimo() {
+        return idPedidoEmprestimo;
     }
 
-    public void setTbEmprestimoBemPermanente(TbEmprestimoBemPermanente tbEmprestimoBemPermanente) {
-        this.tbEmprestimoBemPermanente = tbEmprestimoBemPermanente;
+    public void setIdPedidoEmprestimo(TbEmprestimoBemPermanente idPedidoEmprestimo) {
+        this.idPedidoEmprestimo = idPedidoEmprestimo;
     }
 
-    public TbStatusEmprestimoBemPermanente getTbStatusEmprestimoBemPermanente() {
-        return tbStatusEmprestimoBemPermanente;
+    public TbStatusEmprestimoBemPermanente getIdStatus() {
+        return idStatus;
     }
 
-    public void setTbStatusEmprestimoBemPermanente(TbStatusEmprestimoBemPermanente tbStatusEmprestimoBemPermanente) {
-        this.tbStatusEmprestimoBemPermanente = tbStatusEmprestimoBemPermanente;
+    public void setIdStatus(TbStatusEmprestimoBemPermanente idStatus) {
+        this.idStatus = idStatus;
     }
 
     public TbUsuario getIdResponsavel() {
@@ -99,7 +104,7 @@ public class TbFasesEmprestimoBemPermanente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tbFasesEmprestimoBemPermanentePK != null ? tbFasesEmprestimoBemPermanentePK.hashCode() : 0);
+        hash += (idFasesEmprestimo != null ? idFasesEmprestimo.hashCode() : 0);
         return hash;
     }
 
@@ -110,7 +115,7 @@ public class TbFasesEmprestimoBemPermanente implements Serializable {
             return false;
         }
         TbFasesEmprestimoBemPermanente other = (TbFasesEmprestimoBemPermanente) object;
-        if ((this.tbFasesEmprestimoBemPermanentePK == null && other.tbFasesEmprestimoBemPermanentePK != null) || (this.tbFasesEmprestimoBemPermanentePK != null && !this.tbFasesEmprestimoBemPermanentePK.equals(other.tbFasesEmprestimoBemPermanentePK))) {
+        if ((this.idFasesEmprestimo == null && other.idFasesEmprestimo != null) || (this.idFasesEmprestimo != null && !this.idFasesEmprestimo.equals(other.idFasesEmprestimo))) {
             return false;
         }
         return true;
@@ -118,7 +123,7 @@ public class TbFasesEmprestimoBemPermanente implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.TbFasesEmprestimoBemPermanente[ tbFasesEmprestimoBemPermanentePK=" + tbFasesEmprestimoBemPermanentePK + " ]";
+        return "jpa.TbFasesEmprestimoBemPermanente[ idFasesEmprestimo=" + idFasesEmprestimo + " ]";
     }
     
 }
