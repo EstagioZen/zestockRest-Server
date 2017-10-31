@@ -36,10 +36,10 @@ public class TbEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbEmpres
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbEmprestimoBemPermanente entity) {
+    public TbEmprestimoBemPermanente create2(TbEmprestimoBemPermanente entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT
