@@ -22,7 +22,7 @@ import jpa.TbRoles;
 
 /**
  *
- * @author gedsonfaria
+ * @author gedson
  */
 @Stateless
 @Path("jpa.tbroles")
@@ -36,10 +36,10 @@ public class TbRolesFacadeREST extends AbstractFacade<TbRoles> {
     }
 
     @POST
+    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbRoles create2(TbRoles entity) {
+    public void create(TbRoles entity) {
         super.create(entity);
-        return entity;
     }
 
     @PUT

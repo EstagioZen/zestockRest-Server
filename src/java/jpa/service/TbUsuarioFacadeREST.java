@@ -22,7 +22,7 @@ import jpa.TbUsuario;
 
 /**
  *
- * @author gedsonfaria
+ * @author gedson
  */
 @Stateless
 @Path("jpa.tbusuario")
@@ -36,10 +36,10 @@ public class TbUsuarioFacadeREST extends AbstractFacade<TbUsuario> {
     }
 
     @POST
+    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbUsuario create2(TbUsuario entity) {
+    public void create(TbUsuario entity) {
         super.create(entity);
-        return entity;
     }
 
     @PUT

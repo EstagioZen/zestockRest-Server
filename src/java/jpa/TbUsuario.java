@@ -40,6 +40,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TbUsuario.findByTheme", query = "SELECT t FROM TbUsuario t WHERE t.theme = :theme")})
 public class TbUsuario implements Serializable {
 
+    @OneToMany(mappedBy = "idResponsavel")
+    private Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection;
+    @OneToMany(mappedBy = "idSolicitante")
+    private Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -197,6 +202,24 @@ public class TbUsuario implements Serializable {
     @Override
     public String toString() {
         return "jpa.TbUsuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TbFasesEmprestimoBemPermanente> getTbFasesEmprestimoBemPermanenteCollection() {
+        return tbFasesEmprestimoBemPermanenteCollection;
+    }
+
+    public void setTbFasesEmprestimoBemPermanenteCollection(Collection<TbFasesEmprestimoBemPermanente> tbFasesEmprestimoBemPermanenteCollection) {
+        this.tbFasesEmprestimoBemPermanenteCollection = tbFasesEmprestimoBemPermanenteCollection;
+    }
+
+    @XmlTransient
+    public Collection<TbEmprestimoBemPermanente> getTbEmprestimoBemPermanenteCollection() {
+        return tbEmprestimoBemPermanenteCollection;
+    }
+
+    public void setTbEmprestimoBemPermanenteCollection(Collection<TbEmprestimoBemPermanente> tbEmprestimoBemPermanenteCollection) {
+        this.tbEmprestimoBemPermanenteCollection = tbEmprestimoBemPermanenteCollection;
     }
     
 }

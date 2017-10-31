@@ -18,34 +18,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import jpa.TbLocaisLotacaoBemPermanente;
+import jpa.TbEmprestimoBemPermanente;
 
 /**
  *
  * @author gedson
  */
 @Stateless
-@Path("jpa.tblocaislotacaobempermanente")
-public class TbLocaisLotacaoBemPermanenteFacadeREST extends AbstractFacade<TbLocaisLotacaoBemPermanente> {
+@Path("jpa.tbemprestimobempermanente")
+public class TbEmprestimoBemPermanenteFacadeREST extends AbstractFacade<TbEmprestimoBemPermanente> {
 
     @PersistenceContext(unitName = "EstoqueCPCXPU")
     private EntityManager em;
 
-    public TbLocaisLotacaoBemPermanenteFacadeREST() {
-        super(TbLocaisLotacaoBemPermanente.class);
+    public TbEmprestimoBemPermanenteFacadeREST() {
+        super(TbEmprestimoBemPermanente.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(TbLocaisLotacaoBemPermanente entity) {
+    public void create(TbEmprestimoBemPermanente entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, TbLocaisLotacaoBemPermanente entity) {
+    public void edit(@PathParam("id") Integer id, TbEmprestimoBemPermanente entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class TbLocaisLotacaoBemPermanenteFacadeREST extends AbstractFacade<TbLoc
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbLocaisLotacaoBemPermanente find(@PathParam("id") Integer id) {
+    public TbEmprestimoBemPermanente find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<TbLocaisLotacaoBemPermanente> findAll() {
+    public List<TbEmprestimoBemPermanente> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<TbLocaisLotacaoBemPermanente> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<TbEmprestimoBemPermanente> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

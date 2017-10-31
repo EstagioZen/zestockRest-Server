@@ -22,7 +22,7 @@ import jpa.TbStatusEmprestimoBemPermanente;
 
 /**
  *
- * @author gedsonfaria
+ * @author gedson
  */
 @Stateless
 @Path("jpa.tbstatusemprestimobempermanente")
@@ -36,10 +36,10 @@ public class TbStatusEmprestimoBemPermanenteFacadeREST extends AbstractFacade<Tb
     }
 
     @POST
+    @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public TbStatusEmprestimoBemPermanente create2(TbStatusEmprestimoBemPermanente entity) {
+    public void create(TbStatusEmprestimoBemPermanente entity) {
         super.create(entity);
-        return entity;
     }
 
     @PUT
