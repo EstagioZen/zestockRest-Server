@@ -45,6 +45,11 @@ CREATE TABLE public.tb_bem_permanente (
                 id_co_responsavel INTEGER REFERENCES tb_usuario
 
 );
+-- status: pedido, autorizado, retirado, devolvido, nao devolvido na data
+CREATE TABLE public.tb_status_emprestimo_bem_permanente (
+    id_status SERIAL PRIMARY KEY,
+    descricao VARCHAR(64)
+);
 -- cria uma solicitacao de emprestimo
 CREATE TABLE public.tb_emprestimo_bem_permanente (
                 id_pedido_emprestimo SERIAL PRIMARY KEY,
@@ -52,20 +57,16 @@ CREATE TABLE public.tb_emprestimo_bem_permanente (
                 justificativa VARCHAR(255),
                 dt_prevista_devolucao DATE,
                 id_solicitante INTEGER REFERENCES tb_usuario,
-                id_num_patrimonio INTEGER REFERENCES tb_bem_permanente,
-		id_status_emprestimo INTEGER REFERENCES tb_status_emprestimo_bem_permanente
-                    ON DELETE CASCADE
-                    ON UPDATE CASCADE
+                id_num_patrimonio INTEGER REFERENCES tb_bem_permanente
+                      ON DELETE CASCADE
+                      ON UPDATE CASCADE,
+		            id_status_emprestimo INTEGER REFERENCES tb_status_emprestimo_bem_permanente
+
 );
--- status: pedido, autorizado, retirado, devolvido, nao devolvido na data
 -- lista de combobox
-CREATE TABLE public.tb_status_emprestimo_bem_permanente (
-    id_status SERIAL PRIMARY KEY,
-    descricao VARCHAR(64)
-);
 CREATE TABLE public.tb_fases_emprestimo_bem_permanente (
     id_fases_emprestimo SERIAL PRIMARY KEY,
-    id_pedido_emprestimo INTEGER REFERENCES tb_emprestimo_bem_permanente,  
+    id_pedido_emprestimo INTEGER REFERENCES tb_emprestimo_bem_permanente,
     dt_status DATE,
     id_status INTEGER REFERENCES tb_status_emprestimo_bem_permanente,
     id_responsavel INTEGER REFERENCES tb_usuario -- quem realizou parte da etapa
@@ -91,7 +92,7 @@ CREATE TABLE public.tb_produto_consumo(
                 codigo_barra VARCHAR(32),
                 descricao VARCHAR(255) NOT NULL,
                 especificacao VARCHAR(255),
-                id_unidade INTEGER REFERENCES tb_unidade    
+                id_unidade INTEGER REFERENCES tb_unidade
 );
 -- guarda quanto tem-se em estoque de cada produto (nao deve apagar e sim zerar qtd quando acabar)
 CREATE TABLE public.tb_consumo (
@@ -116,7 +117,7 @@ CREATE TABLE public.tb_historico_consumo (
 		dt_retirada DATE
 );
 
--- 
+--
 -- CREATE TABLE public.tb_theme(
 --     id_theme SERIAL PRIMARY KEY,
 --     nome VARCHAR(64),
