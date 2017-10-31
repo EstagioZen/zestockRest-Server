@@ -163,13 +163,13 @@ VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000004', '2');
 INSERT INTO tb_emprestimo_bem_permanente (dt_prevista_retirada, justificativa, dt_prevista_devolucao, id_solicitante, id_num_patrimonio, id_status_emprestimo)
 VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000005', '2');
 INSERT INTO tb_emprestimo_bem_permanente (dt_prevista_retirada, justificativa, dt_prevista_devolucao, id_solicitante, id_num_patrimonio, id_status_emprestimo)
-VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000001', '3');
+VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000006', '3');
 INSERT INTO tb_emprestimo_bem_permanente (dt_prevista_retirada, justificativa, dt_prevista_devolucao, id_solicitante, id_num_patrimonio, id_status_emprestimo)
-VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000002', '4');
+VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000007', '4');
 INSERT INTO tb_emprestimo_bem_permanente (dt_prevista_retirada, justificativa, dt_prevista_devolucao, id_solicitante, id_num_patrimonio, id_status_emprestimo)
-VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000003', '5');
+VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000008', '5');
 INSERT INTO tb_emprestimo_bem_permanente (dt_prevista_retirada, justificativa, dt_prevista_devolucao, id_solicitante, id_num_patrimonio, id_status_emprestimo)
-VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000004', '5');
+VALUES ('2017-10-26', 'teste', '2017-10-28', '3', '00000009', '5');
 
 INSERT INTO tb_fases_emprestimo_bem_permanente (id_pedido_emprestimo, dt_status, id_status, id_responsavel)
 VALUES ('1', '2017-10-26', '1', '3');
